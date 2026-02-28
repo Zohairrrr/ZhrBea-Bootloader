@@ -1,0 +1,7 @@
+*.o
+*.so
+*.efi
+image/vmlinuz-linux
+image/initramfs-linux.img
+image/initramfs-linux-fallback.img
+image/NvVars
