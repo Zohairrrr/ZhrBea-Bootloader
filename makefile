@@ -21,6 +21,11 @@ EFI_LDS   = $(EFILIB)/elf_$(ARCH)_efi.lds
 # ── Source files ─────────────────────────────────────────────────────────────
 SRCS = src/main.c \
        src/ui.c   \
+       src/gop.c  \
+       src/splash.c \
+       src/history.c \
+       src/scanner.c \
+       src/health.c \
        src/config.c \
        src/boot.c
 
@@ -44,7 +49,10 @@ CFLAGS = \
     -Wextra                  \
     -Wno-unused-parameter    \
     -DGNU_EFI_USE_MS_ABI     \
-    -O2
+    -mno-sse                 \
+    -mno-sse2                \
+    -mno-avx                 \
+    -O1
 
 # ── Linker flags ─────────────────────────────────────────────────────────────
 LDFLAGS = \
@@ -71,6 +79,7 @@ endif
 
 QEMU_FLAGS = \
     -bios $(OVMF)                              \
+    -cpu qemu64                                \
     -drive format=raw,file=fat:rw:$(IMAGE_DIR) \
     -m 512M                                    \
     -serial stdio                              \
